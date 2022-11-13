@@ -1,4 +1,3 @@
-from quiffen import Qif
 import decimal
 from decimal import Decimal
 import pandas as pd
@@ -148,24 +147,25 @@ for key,value in incomeDict.items():
 # print(expenses)
 # print(incomes)
 
-# df = pd.DataFrame(columns=['Category','2022 Total'])
-# df = df.append({'Category' : 'INCOME', '2022 Total' : '******'}, ignore_index=True)
-# for key,value in incomeDict.items():
-#     df = df.append({'Category': key, '2022 Total' : value}, ignore_index=True)
+df = pd.DataFrame(columns=['Category','2022 Total'])
+df = df.append({'Category' : 'INCOME', '2022 Total' : '******'}, ignore_index=True)
+for key,value in incomeDict.items():
+    df = df.append({'Category': key, '2022 Total' : value}, ignore_index=True)
 
-# df = df.append({'Category' : 'TOTAL INCOME', '2022 Total' : incomes}, ignore_index=True)
+df = df.append({'Category' : 'TOTAL INCOME', '2022 Total' : incomes}, ignore_index=True)
 
-# df = df.append({'Category' : 'EXPENSES', '2022 Total' : '******'}, ignore_index=True)
-# for key,value in expensesDict.items():
-#     df = df.append({'Category': key, '2022 Total' : value}, ignore_index=True)
+df = df.append({'Category' : 'EXPENSES', '2022 Total' : '******'}, ignore_index=True)
+for key,value in expensesDict.items():
+    df = df.append({'Category': key, '2022 Total' : value}, ignore_index=True)
 
-# df = df.append({'Category' : 'TOTAL EXPENSES', '2022 Total' : expenses}, ignore_index=True)
-# df = df.append({'Category' : 'OVERALL TOTAL', '2022 Total' : incomes - expenses}, ignore_index=True)
+df = df.append({'Category' : 'TOTAL EXPENSES', '2022 Total' : expenses}, ignore_index=True)
+df = df.append({'Category' : 'OVERALL TOTAL', '2022 Total' : incomes - expenses}, ignore_index=True)
 
+# pc
 # df.to_csv('C:/Users/12158/Desktop/BSA_APP/'+name+' - Income&Expense by Category.csv', index=False)
 
-
-
+# mac
+df.to_csv('/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/'+name+' - Income&Expense by Category.csv', index=False)
 
 
 
