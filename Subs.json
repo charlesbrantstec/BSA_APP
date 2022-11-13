@@ -43,6 +43,26 @@
         {
             "name" : "VIP CONSTRUCTION LLC",
             "address" : "167 ROGERS AVE, EAST WINDSOR NJ 08520",
+            "ein" : "83-0728430"
+        },
+        {
+            "name" : "MAIN LINE CONTRACTOR CORP",
+            "address" : "275 CHESTNUT ST STORE B SUITE 182, NEWARK NJ 07105",
+            "ein" : "88-3006643"
+        },
+        {
+            "name" : "MAXIMUM CONTRACTOR CORP",
+            "address" : "238 ORCHARD ST, ELIZABETH NJ 07208",
+            "ein" : "85-4275362"
+        },
+        {
+            "name" : "",
+            "address" : "",
+            "ein" : ""
+        },
+        {
+            "name" : "",
+            "address" : "",
             "ein" : ""
         }
     ]
