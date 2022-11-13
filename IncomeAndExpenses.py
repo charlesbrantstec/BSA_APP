@@ -4,14 +4,14 @@ import pandas as pd
 import re
 import sys
 
-# qif = Qif.parse('REIFAST CONSTRUCTION.qif')
-# print(qif.accounts)
 
-# textfile = open(sys.argv[1], 'r')
-textfile = open('AE CARPENTERS INC.QIF', 'r')
+textfile = open(sys.argv[1], 'r')
+#pc
 # name = sys.argv[1].split('\\')[-1].split('.QIF')[0]
+#mac
+name = sys.argv[1].split('/')[-1].split('.QIF')[0]
 # textfile = open('REIFAST CONSTRUCTION.QIF', 'r')
-name = 'ae carpenters'
+# name = 'reifast'
 filetext = textfile.read()
 textfile.close()
 
@@ -114,21 +114,18 @@ for item in raw[3:]:
     item1 = item.split('\n')
     # is this an expense?
     if bool(re.search('\'22', item1[1])):
-        if bool((re.search('U-', item1[2]))) and '!Account' not in item1[1]:
+        if bool(re.search('U-', item1[2])) and '!Account' not in item1[1]:
             for str in item1:
                 if str.startswith('L'):
                     category = str[1:].split(':')[0]
-                    # expenseCategories.append(str[1:])
-            expense = Decimal((item1[2].split('U-')[1]).replace(',',''))
-            expensesDict[category] += expense
-        if bool(re.search(r'[0-9]', item1[2][:2])):
+                    expense = Decimal((item1[2].split('U-')[1]).replace(',',''))
+                    expensesDict[category] += expense
+        if bool(re.search(r'[0-9]', item1[2][:2])) and '!Account' not in item1[1]:
             for str in item1:
                 if str.startswith('L'):
                     category = str[1:].split(':')[0]
-            income = Decimal((item1[2].split('U')[1]).replace(',',''))
-            incomeDict[category] += income
-    print(item1)
-
+                    income = Decimal((item1[2].split('U')[1]).replace(',',''))
+                    incomeDict[category] += income
 
 # convert Decimal(value) to string value
 for key,value in expensesDict.items():
@@ -136,11 +133,6 @@ for key,value in expensesDict.items():
 
 for key,value in incomeDict.items():
     incomeDict[key] = "{:.2f}".format(value)
-
-# for key,value in incomeDict.items():
-#     if value == '0.00':
-#         print('ok')
-#         del incomeDict[key]
 
 # print(expensesDict)
 # print(incomeDict)
