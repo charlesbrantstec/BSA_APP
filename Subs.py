@@ -19,3 +19,4 @@ textfile.close()
 # GET YEARLY TOTALS BY SUB                       #
 ##################################################
 
+
