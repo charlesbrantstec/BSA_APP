@@ -8,7 +8,6 @@ import json
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 
-
 # textfile = open(sys.argv[1], 'r')
 # name = sys.argv[1].split('\\')[-1].split('.QIF')[0]
 textfile = open('REIFAST CONSTRUCTION.QIF', 'r')
