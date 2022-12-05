@@ -90,7 +90,7 @@ def subs_info_df():
             position = val_list.index(max)
             true_sub = key_list[position]
             for row in json_df.iterrows():
-                if row[1] == true_sub:
+                if row['name'] == true_sub:
                     print(''+row['name']+'\n'+row['address']+'\n'+row['ein'])
                 for row in subs_df().iterrows():
                     if row['Subcontractor'] == subcontractor:
