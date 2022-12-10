@@ -10,7 +10,7 @@ from fuzzywuzzy import process
 
 # textfile = open(sys.argv[1], 'r')
 # name = sys.argv[1].split('\\')[-1].split('.QIF')[0]
-textfile = open('REIFAST CONSTRUCTION.QIF', 'r')
+textfile = open('AE CARPENTERS INC.QIF', 'r')
 name = 'REIFAST CONSTRUCTION'
 filetext = textfile.read()
 textfile.close()
@@ -76,10 +76,10 @@ print(json_df)
 # print(jsonDf)
 
 def subs_info_df():
-    for subcontractor in subs_df()['Subcontractor']:
+    sub_df = subs_df()
+    for subcontractor in sub_df['Subcontractor']:
         fuzz_dict = {}
-        # for sub in json_df['name']:
-        # newdf = json_df.copy()
+        total = sub_df[sub_df['Subcontractor'] == subcontractor]['2022 Total'].to_string(index=False)
         address = ''
         for index, row in json_df.iterrows():
             sub = row['name']
@@ -90,32 +90,24 @@ def subs_info_df():
             match = ''
             for key,value in fuzz_dict.items():
                 if value > max:
-                    max = value
+                    max = value 
                     match = key
-            address = json_df[json_df['name'] == match]['address']
-            # ein = json_df.loc[json_df['name'] == match]['ein']
+                if max < 98:
+                    match = subcontractor
+            if match == subcontractor:
+                address = 'N\A'
+                ein = 'N\A'
+            else:
+                address = json_df[json_df['name'] == match]['address'].to_string(index=False)
+                ein = json_df[json_df['name'] == match]['ein'].to_string(index=False)
+            if len(address) == 0:
+                address = 'N/A'
+            if len(ein) == 0:
+                ein = 'N/A'
 
-            # for row in json_df.iterrows():
-        # print(match,address,ein)
-        print(address)
+        print(match + '\n' + address + '\n' + ein)
+        print('Total:' + total + '\n')
             
-            # val_list = list(fuzz_dict.values())
-            # key_list = list(fuzz_dict.keys())
-            # position = val_list.index(max)
-            # true_sub = key_list[position]
-            # for row in json_df.iterrows():
-            #     if row['name'] == true_sub:
-            #         print(''+row['name']+'\n'+row['address']+'\n'+row['ein'])
-            #     for row in subs_df().iterrows():
-            #         if row['Subcontractor'] == subcontractor:
-            #             print('Total: ' + row['2022 Total'])
 
-
-
-
-            # print(sub + ':' +str(fuzz.partial_ratio(subcontractor.upper(),sub.upper())))
             
 subs_info_df()
-
-# print(subs_df())
-# subs_info_df()
