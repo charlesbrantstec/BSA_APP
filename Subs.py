@@ -78,28 +78,44 @@ print(json_df)
 def subs_info_df():
     for subcontractor in subs_df()['Subcontractor']:
         fuzz_dict = {}
-        for sub in json_df['name']:
+        # for sub in json_df['name']:
+        # newdf = json_df.copy()
+        address = ''
+        for index, row in json_df.iterrows():
+            sub = row['name']
+            address = row['address']
+            ein = row['ein']
             fuzz_dict.update({sub:fuzz.partial_ratio(subcontractor.upper(),sub.upper())})
             max = 0
+            match = ''
             for key,value in fuzz_dict.items():
                 if value > max:
                     max = value
-            val_list = list(fuzz_dict.values())
-            key_list = list(fuzz_dict.keys())
-            position = val_list.index(max)
-            true_sub = key_list[position]
-            for row in json_df.iterrows():
-                if row['name'] == true_sub:
-                    print(''+row['name']+'\n'+row['address']+'\n'+row['ein'])
-                for row in subs_df().iterrows():
-                    if row['Subcontractor'] == subcontractor:
-                        print('Total: ' + row['2022 Total'])
+                    match = key
+            address = json_df[json_df['name'] == match]['address']
+            # ein = json_df.loc[json_df['name'] == match]['ein']
+
+            # for row in json_df.iterrows():
+        # print(match,address,ein)
+        print(address)
+            
+            # val_list = list(fuzz_dict.values())
+            # key_list = list(fuzz_dict.keys())
+            # position = val_list.index(max)
+            # true_sub = key_list[position]
+            # for row in json_df.iterrows():
+            #     if row['name'] == true_sub:
+            #         print(''+row['name']+'\n'+row['address']+'\n'+row['ein'])
+            #     for row in subs_df().iterrows():
+            #         if row['Subcontractor'] == subcontractor:
+            #             print('Total: ' + row['2022 Total'])
 
 
 
 
             # print(sub + ':' +str(fuzz.partial_ratio(subcontractor.upper(),sub.upper())))
             
+subs_info_df()
 
 # print(subs_df())
-subs_info_df()
+# subs_info_df()
