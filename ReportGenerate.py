@@ -3,10 +3,14 @@ from docx.shared import Inches
 from docx.shared import Pt
 
 document = Document()
+
 style = document.styles['Normal']
 font = style.font
 font.name = 'Times New Roman'
 font.size = Pt(12)
+
+paragraph_format = style.paragraph_format
+paragraph_format.line_spacing = Pt(24)
 
 p = document.add_paragraph()
 l1 = p.add_run('1.Name:____________________________________________________________')
@@ -18,4 +22,4 @@ l3 = p.add_run('  1099 Amount Paid: $______________ W2 Amount Paid: $___________
 
 
 
-document.save('test.docx')
+document.save('test.docx') 
