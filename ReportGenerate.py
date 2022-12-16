@@ -36,9 +36,22 @@ def a1099(s):
     return '_' + s + ('_' * u_len)
 
 paragraph_format = style.paragraph_format
+<<<<<<< HEAD
 paragraph_format.line_spacing = Pt(30)
 
 p = document.add_paragraph()
+=======
+# paragraph_format.line_spacing = Pt(24)
+
+p = document.add_paragraph()
+# p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+l1 = p.add_run('1.Name:____________________________________________________________   \n    \
+                  Address:_________________________________________________________')
+# l2 = p.add_run('  Address:_________________________________________________________')	
+# l2 = p.add_run('  EIN/ITIN/SS#:_____________________________')	
+# l3 = p.add_run('  1099 Amount Paid: $______________ W2 Amount Paid: $______________')			
+
+>>>>>>> 39fb7975e5d9bfb5c7cb12e0a69eaa89ddfe0cc8
 
 # print("\x1B[4m" + text + "\x1B[0m")
 
