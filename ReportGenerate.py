@@ -36,30 +36,16 @@ def a1099(s):
     return '_' + s + ('_' * u_len)
 
 paragraph_format = style.paragraph_format
-<<<<<<< HEAD
 paragraph_format.line_spacing = Pt(30)
 
 p = document.add_paragraph()
-=======
-# paragraph_format.line_spacing = Pt(24)
 
-p = document.add_paragraph()
-# p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-l1 = p.add_run('1.Name:____________________________________________________________   \n    \
-                  Address:_________________________________________________________')
-# l2 = p.add_run('  Address:_________________________________________________________')	
-# l2 = p.add_run('  EIN/ITIN/SS#:_____________________________')	
-# l3 = p.add_run('  1099 Amount Paid: $______________ W2 Amount Paid: $______________')			
+def sub_block(nm,adr,id,ten99):
+    p.add_run('1.Name:'); p.add_run(name(nm) + '\n').underline = True
+    p.add_run('   Address:'); p.add_run(addr(adr) + '\n').underline = True #61
+    p.add_run('   EIN/ITIN/SS#:'); p.add_run(ein(id) + '\n').underline = True
+    p.add_run('   1099 Amount Paid: $'); p.add_run(a1099(ten99)).underline = True; p.add_run('  W2 Amount Paid: $________________' +'\n\n')			
 
->>>>>>> 39fb7975e5d9bfb5c7cb12e0a69eaa89ddfe0cc8
-
-# print("\x1B[4m" + text + "\x1B[0m")
-
-corp = 'GREEN MASTER CONTRACTOR CORP'
-
-p.add_run('1.Name:'); p.add_run(name(test_name) + '\n').underline = True
-p.add_run('   Address:'); p.add_run(addr(test_addr) + '\n').underline = True #61
-p.add_run('   EIN/ITIN/SS#:'); p.add_run(ein(test_ein) + '\n').underline = True
-p.add_run('   1099 Amount Paid: $'); p.add_run(a1099(test_tot)).underline = True; p.add_run('  W2 Amount Paid: $________________' +'\n')			
+sub_block(test_name,test_addr,test_ein,test_tot)
 
 document.save('test.docx') 
