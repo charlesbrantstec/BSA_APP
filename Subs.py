@@ -8,6 +8,7 @@ import json
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 
+
 # textfile = open(sys.argv[1], 'r')
 # name = sys.argv[1].split('\\')[-1].split('.QIF')[0]
 textfile = open('REIFAST CONSTRUCTION.QIF', 'r')
@@ -66,17 +67,19 @@ def subs_df():
 ##################################################
 # GET INFO FOR SUBS                              #
 ##################################################
+# NEEED TO REFACTOR TO USE BSA_DB NOT JSON #######
 
 with open('Subs.json','r') as f:
     data = json.loads(f.read())
 
 json_df = pd.json_normalize(data, record_path = ['subcontractors'])
 
-print(json_df)
+# print(json_df)
 # print(jsonDf)
 
 def subs_info_df():
-    sub_df = subs_df()
+    tdf = pd.DataFrame(columns=['Name','Address','EIN','Total'])
+    sub_df = subs_df()  
     for subcontractor in sub_df['Subcontractor']:
         fuzz_dict = {}
         total = sub_df[sub_df['Subcontractor'] == subcontractor]['2022 Total'].to_string(index=False)
@@ -104,10 +107,13 @@ def subs_info_df():
                 address = 'N/A'
             if len(ein) == 0:
                 ein = 'N/A'
-
-        print(match + '\n' + address + '\n' + ein)
-        print('Total:' + total + '\n')
-            
-
-            
+        new_row = pd.DataFrame({'Name' : [match], 'Address': [address], 'EIN' : [ein], 'Total' : [total]})
+        ndf = pd.concat([tdf, new_row])
+        tdf = ndf
+        # print(match + '\n' + address + '\n' + ein)
+        # print('Total:' + total + '\n')
+    # print(ndf)
+    return ndf
+                                   
 subs_info_df()
+
