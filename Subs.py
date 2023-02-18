@@ -24,6 +24,7 @@ subs = set()
 subs = {}
 df = pd.DataFrame
 
+
 def subs_df():
     # get list of subs
     for item in raw:
@@ -37,8 +38,8 @@ def subs_df():
                         if str.startswith('P'):
                             sub = str[1:]
                             if sub not in subs:
-                                subs.update({sub:Decimal('0')})
-                                value = Decimal((item1[2][2:]).replace(',',''))
+                                subs.update({sub: Decimal('0')})
+                                value = Decimal((item1[2][2:]).replace(',', ''))
                                 subs[sub] += value
 
     total = Decimal('0')
@@ -48,12 +49,13 @@ def subs_df():
     df = pd.DataFrame(columns=['Subcontractor', '2022 Total'])
     # df = df.append({'Subcontractor':'******', '2022 Total':'******'}, ignore_index=True)
 
-    for key,value in subs.items():
-        df = df.append({'Subcontractor': key, '2022 Total' : value}, ignore_index=True)
+    for key, value in subs.items():
+        df = df.append({'Subcontractor': key, '2022 Total': value}, ignore_index=True)
 
     # df = df.append({'Subcontractor':'******', '2022 Total':'******'}, ignore_index=True)
     # df = df.append({'Subcontractor':'TOTAL', '2022 Total':total}, ignore_index=True)
     return df
+
 
 # pc
 # df.to_csv('C:/Users/12158/Desktop/BSA_APP/'+name+' - Subcontractors Payments.csv', index=False)
@@ -67,12 +69,14 @@ def subs_df():
 # GET INFO FOR SUBS                              #
 ##################################################
 
-with open('Subs.json','r') as f:
+with open('Subs.json', 'r') as f:
     data = json.loads(f.read())
 
-json_df = pd.json_normalize(data, record_path = ['subcontractors'])
+json_df = pd.json_normalize(data, record_path=['subcontractors'])
 
 print(json_df)
+
+
 # print(jsonDf)
 
 def subs_info_df():
@@ -85,12 +89,12 @@ def subs_info_df():
             sub = row['name']
             address = row['address']
             ein = row['ein']
-            fuzz_dict.update({sub:fuzz.partial_ratio(subcontractor.upper(),sub.upper())})
+            fuzz_dict.update({sub: fuzz.partial_ratio(subcontractor.upper(), sub.upper())})
             max = 0
             match = ''
-            for key,value in fuzz_dict.items():
+            for key, value in fuzz_dict.items():
                 if value > max:
-                    max = value 
+                    max = value
                     match = key
                 if max < 98:
                     match = subcontractor
@@ -107,7 +111,6 @@ def subs_info_df():
 
         print(match + '\n' + address + '\n' + ein)
         print('Total:' + total + '\n')
-            
 
-            
+
 subs_info_df()
