@@ -1,6 +1,8 @@
 from docx import Document
 from docx.shared import Inches
 from docx.shared import Pt
+import Subs
+import pandas as pd
 
 document = Document()
 
@@ -41,23 +43,33 @@ def a1099(s):
 
 
 paragraph_format = style.paragraph_format
-paragraph_format.line_spacing = Pt(30)
+paragraph_format.line_spacing = Pt(20)
 
 p = document.add_paragraph()
 
+def create_sub_block(nm,adr,id,ten99):
+    p.add_run('1.Name:'); p.add_run(name(nm) + '\n').underline = True
+    p.add_run('   Address:'); p.add_run(addr(adr) + '\n').underline = True #61
+    p.add_run('   EIN/ITIN/SS#:'); p.add_run(ein(id) + '\n').underline = True
+    p.add_run('   1099 Amount Paid: $'); p.add_run(a1099(ten99)).underline = True; p.add_run('  W2 Amount Paid: $________________' +'\n\n')			
 
-def sub_block(nm, adr, id, ten99):
-    p.add_run('1.Name:');
-    p.add_run(name(nm) + '\n').underline = True
-    p.add_run('   Address:');
-    p.add_run(addr(adr) + '\n').underline = True  # 61
-    p.add_run('   EIN/ITIN/SS#:');
-    p.add_run(ein(id) + '\n').underline = True
-    p.add_run('   1099 Amount Paid: $');
-    p.add_run(a1099(ten99)).underline = True;
-    p.add_run('  W2 Amount Paid: $________________' + '\n\n')
+create_sub_block(test_name,test_addr,test_ein,test_tot)
 
+df = pd.DataFrame(columns=['Name','Address','EIN','Total'])
+subs_df = pd.concat([df,Subs.subs_info_df()])
+# for index, row in subs_df.iterrows():
+#     print(row['Name'])
+# print(subs_df)
 
-sub_block(test_name, test_addr, test_ein, test_tot)
+def populate_subs():
+    for index, row in subs_df.iterrows():
+        name = row['Name']
+        address = row['Address']
+        ein = row['EIN']
+        total = row ['Total']
+        print(name, address, ein, total)
+        create_sub_block(name, address, ein, total)
+
+populate_subs()
 
 document.save('test.docx')
