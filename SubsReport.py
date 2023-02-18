@@ -3,8 +3,10 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 
 
-df = pd.read_excel(r'C:\Users\12158\Desktop\BSA_APP\ReifastSubs.xlsx')
-subs_df = pd.read_excel(r'C:\Users\12158\Desktop\BSA_APP\SUBS 2022.xlsx')
+# df = pd.read_excel(r'C:\Users\12158\Desktop\BSA_APP\ReifastSubs.xlsx')
+# subs_df = pd.read_excel(r'C:\Users\12158\Desktop\BSA_APP\SUBS 2022.xlsx')
+df = pd.read_excel(r'/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/ReifastSubs.xlsx')
+subs_df = pd.read_excel(r'/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/SUBS 2022.xlsx')
 subs_df = subs_df.drop(subs_df.index[0])
 
 def subs_totals():
