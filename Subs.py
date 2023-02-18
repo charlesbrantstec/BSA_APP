@@ -115,5 +115,5 @@ def subs_info_df():
     # print(ndf)
     return ndf
                                    
-subs_info_df()
+print(subs_info_df())
 
