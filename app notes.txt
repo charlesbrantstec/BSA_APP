@@ -1,0 +1,9 @@
+* Run App
+  => Enter a company name:
+	=> Is *** this the company you meant? y/N
+	   (fuzzy match input string to company names, add all matches to list and iterate through each match)
+  => Drop the report here:
+	=> Are these subcontractors the same? y/N
+	   (fuzzy match subs against each and show potential duplicates)
+  => Success! 1096 & 1099 have been generated.
+  => The following subcontracts are missing info ***

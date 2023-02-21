@@ -76,13 +76,7 @@ with open('Subs.json', 'r') as f:
 
 json_df = pd.json_normalize(data, record_path=['subcontractors'])
 
-<<<<<<< HEAD
-print(json_df)
-
-
-=======
 # print(json_df)
->>>>>>> 43853fa5497719411fb3a126a150dc7233344bb6
 # print(jsonDf)
 
 def subs_info_df():
@@ -125,11 +119,3 @@ def subs_info_df():
                                    
 print(subs_info_df())
 
-<<<<<<< HEAD
-        print(match + '\n' + address + '\n' + ein)
-        print('Total:' + total + '\n')
-
-
-subs_info_df()
-=======
->>>>>>> 43853fa5497719411fb3a126a150dc7233344bb6
