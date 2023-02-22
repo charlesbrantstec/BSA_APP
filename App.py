@@ -1,8 +1,11 @@
 import CompanyReader
+import SubsReport
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
+import HtmlWriter
 
-df = CompanyReader.contacts_df
+df = CompanyReader.setup_df()
+
 print('Welcome to Charlie\'s 1096 & 1099 generator!')
 
 def get_company():
@@ -26,8 +29,14 @@ def get_company():
             if y.upper() == 'Y' or y.upper() == 'YES':
                 inputted_company += match
                 break
-    return inputted_company
+    # return inputted_company
+    print('Drag and drop the subcontractor report for your company here:')
+    z = input()
+    print(SubsReport.merge_duplicates(SubsReport.sub_totals(z)))
     
-# get_company()
+get_company()
+# HtmlWriter.populate_html(get_company(),df)
 
-print(df.loc[df['Customer'] == get_company()])
+
+
+# print(df.loc[df['Customer'] == get_company(), 'Customer'].item())
