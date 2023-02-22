@@ -4,40 +4,19 @@ from fuzzywuzzy import process
 from pathlib import Path
 import re
 
-
-# df = pd.read_excel(r'C:\Users\12158\Desktop\BSA_APP\ReifastSubs.xlsx')
-# subs_df = pd.read_excel(r'C:\Users\12158\Desktop\BSA_APP\SUBS 2022.xlsx')
-# # df = pd.read_excel(r'/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/ReifastSubs.xlsx')
-# # subs_df = pd.read_excel(r'/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/SUBS 2022.xlsx')
-# subs_df = subs_df.drop(subs_df.index[0])
-
-# def subs_totals():
-#     arr = df['Unnamed: 4'].unique() # get all unique subs from df
-#     cleaned_arr = [item for item in arr if isinstance(item, str) and item != 'Description'] # clean the subs array
-#     sub_totals = {}
-#     for subcontractor in cleaned_arr:
-#         sum = df.loc[df['Unnamed: 4'] == subcontractor, 'Unnamed: 8'].sum() # get sum by subcontractor
-#         formatted_sum = '{:,.2f}'.format(abs(sum)) # format sum
-#         sub_totals.update({subcontractor:formatted_sum})
-#     return sub_totals
-            
-# print(subs_totals())
-# {'All Best Contractors': '321,331.00', 'CG Contractor': '6,500.00',
-#  'Da Silva And Associate LLC': '10,000.00', 'GEE Cotractor LLC': '665.00',
-#  'Green Master Contractor Corp': '563,155.84', 'GS General Construction': '7,824.00',
-#  'Main Line Contractor Corp': '47,468.64', 'Maximum Contrators': '37,985.00', 'MFB Construction LLC': '72,720.00',
-#  'New Team Contractor': '182,843.57', 'Vip Construction Llc': '4,244.68'}
-# report = input()
 def has_letters(inputString):
     return bool(re.search('[a-zA-Z]', inputString))
 
 def sub_totals(report):
 # def sub_totals():
-
     # df = pd.read_excel(r'C:\Users\12158\Desktop\BSA_APP\REIFAST SUBS.xlsx')
 
     sub_totals = {}
-    df = pd.read_excel(report[3:][:-1])
+    # pc
+    # df = pd.read_excel(report[3:][:-1])
+    # mac
+    df = pd.read_excel(report.replace('\'',''))
+
     for index, row in df.iterrows():
         name = str(row['Unnamed: 1'])
         amount = row['Unnamed: 10']
@@ -89,6 +68,28 @@ def merge_duplicates(sub_totals):
                 sub_totals.update({z : total})
 
     return sub_totals
+
+def populate_subs(sub_totals):
+
+    df = pd.read_excel('/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/SUBS 2022.xlsx')
+    df = df.drop(0, axis=0)
+
+    for key, value in sub_totals.items():
+
+        for index, row in df.iterrows():
+
+                master_sub = row['SUB CONTRACTORS NAME']
+
+                fuzz_ratio = fuzz.partial_ratio(key.upper(), master_sub.upper())
+
+                if fuzz_ratio > 90:
+                    print(key + ', ' + master_sub + ' : ' + str(fuzz_ratio))
+
+
+# df = pd.read_excel('/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/SUBS 2022.xlsx')
+# print(df)
+
+# populate_subs()
 
 # print(merge_duplicates(sub_totals()))
 

@@ -1,11 +1,9 @@
 from bs4 import BeautifulSoup as bs
 import pandas as pd
 import os
-import re
-import pdfkit
- 
+import re 
 
-def populate_html(company, df):
+def populate_html(company, df, subs):
     with open('test.html', 'r', encoding="utf8") as f:
         html_string = f.read()
 

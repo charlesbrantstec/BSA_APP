@@ -16,7 +16,9 @@ def has_numbers(inputString):
     return bool(re.search(r'\d', inputString))
 
 def setup_df():
-    contacts = pd.read_csv('C:\\Users\\12158\\Desktop\\BSA_APP\\CUSTOMER CONTACTS.csv')
+    # contacts = pd.read_csv('C:\\Users\\12158\\Desktop\\BSA_APP\\CUSTOMER CONTACTS.csv')
+    contacts = pd.read_csv('/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/CUSTOMER CONTACS.csv')
+
     contacts_df = pd.DataFrame(columns=['Customer','Main Phone','Street','City','State','Zip','E.I.N.'])
 
     for index,row in contacts.iterrows():

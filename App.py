@@ -33,7 +33,10 @@ def get_company():
     # return inputted_company
     print('Drag and drop the subcontractor report for your company here:')
     z = input()
-    print(SubsReport.merge_duplicates(SubsReport.sub_totals(z)))
+    sub_totals = SubsReport.sub_totals(z)
+    SubsReport.merge_duplicates(sub_totals)
+    SubsReport.populate_subs(sub_totals)
+    # print(SubsReport.merge_duplicates(sub_totals))
     
 get_company()
 # HtmlWriter.populate_html(get_company(),df)
