@@ -4,8 +4,10 @@ import re
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-
-contacts = pd.read_csv('C:\\Users\\12158\\Desktop\\BSA_APP\\CUSTOMER CONTACTS.csv')
+# pc
+# contacts = pd.read_csv('C:\\Users\\12158\\Desktop\\BSA_APP\\CUSTOMER CONTACTS.csv')
+# mac
+contacts = pd.read_csv('/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/CUSTOMER CONTACS.csv')
 # print(contacts)
 
 contacts_df = pd.DataFrame(columns=['Customer','Main Phone','Street','City','State','Zip','E.I.N.'])

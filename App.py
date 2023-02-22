@@ -1,9 +1,11 @@
 import CompanyReader
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
+import pdf
 
 df = CompanyReader.contacts_df
 print('Welcome to Charlie\'s 1096 & 1099 generator!')
+company = ''
 
 def get_company():
     print('Enter a company name: ')
@@ -26,8 +28,10 @@ def get_company():
             if y.upper() == 'Y' or y.upper() == 'YES':
                 inputted_company += match
                 break
+    # company += inputted_company
     return inputted_company
     
-# get_company()
+get_company()
+print(pdf.info(company))
 
-print(df.loc[df['Customer'] == get_company()])
+# print(df.loc[df['Customer'] == get_company()])
