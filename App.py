@@ -34,6 +34,7 @@ def get_company():
     print('Drag and drop the subcontractor report for your company here:')
     z = input()
     sub_totals = SubsReport.sub_totals(z)
+    # print(sub_totals)
     SubsReport.merge_duplicates(sub_totals)
     SubsReport.populate_subs(sub_totals)
     # print(SubsReport.merge_duplicates(sub_totals))

@@ -1,3 +1,5 @@
+from doctest import master
+import Levenshtein
 import pandas as pd
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
@@ -23,7 +25,7 @@ def sub_totals(report):
         if has_letters(name) and name != 'Date' and  name != 'nan':
             amount = '{:,.2f}'.format(float(amount))[1:]
             sub_totals.update({name.upper() : amount})
-        
+
     return sub_totals
 
 def merge_duplicates(sub_totals):
@@ -66,13 +68,41 @@ def merge_duplicates(sub_totals):
                 del copy[value]
 
                 sub_totals.update({z : total})
-
+    # print(sub_totals)
     return sub_totals
+
+# def populate_subs(sub_totals):
+
+#     df = pd.read_excel('/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/SUBS 2022.xlsx')
+
+#     fuzz_df = pd.DataFrame(columns=['Input','Master','PartialRatio','Ratio'])
+
+#     sub_list = df['SUB CONTRACTORS NAME'].tolist()
+
+#     matches_dict = {}
+
+#     for key, value in sub_totals.items():
+
+#         match = process.extractOne(key, sub_list)
+
+#         if match[1] >= 80:
+
+#             matches_dict[key] = (match[0], match[1])
+
+#         else:
+
+#             matches_dict[key] = ('NEW', 0)
+
+#     for key, value in matches_dict.items():
+#         print(key + ": " + str(value))
+#     return matches_dict
 
 def populate_subs(sub_totals):
 
     df = pd.read_excel('/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/SUBS 2022.xlsx')
     df = df.drop(0, axis=0)
+
+    fuzz_df = pd.DataFrame(columns=['Input','Master','PartialRatio','Ratio'])
 
     for key, value in sub_totals.items():
 
@@ -80,10 +110,54 @@ def populate_subs(sub_totals):
 
                 master_sub = row['SUB CONTRACTORS NAME']
 
+                token_ratio = fuzz.token_set_ratio(key.upper(), master_sub.upper())
+
                 fuzz_ratio = fuzz.partial_ratio(key.upper(), master_sub.upper())
 
-                if fuzz_ratio > 90:
-                    print(key + ', ' + master_sub + ' : ' + str(fuzz_ratio))
+                ratio = fuzz.ratio(key.upper(), master_sub.upper())
+
+                new_row = {'Input' : key, 'Master' : master_sub, 'PartialRatio' : fuzz_ratio, 'Ratio' : ratio}
+
+                fuzz_df = fuzz_df.append(new_row, ignore_index=True)
+
+                if ratio >= 50 and fuzz_ratio >= 50:
+
+                    # partial_ratio = fuzz.ratio(key.upper(), master_sub.upper())
+
+                    # fuzz_ratio = fuzz.token_set_ratio(key.upper(), master_sub.upper())
+
+                    print(key + ', ' + master_sub + ' : ' + 'ratio: ' +  str(ratio) + ', fuzz: ' + str(fuzz_ratio), ', token: ' + str(token_ratio))
+
+                    # if fuzz_ratio > 80:
+
+                    #     fuzz_ratio = fuzz.token_set_ratio(key.upper(), master_sub.upper())
+
+
+                    #     print(key + ', ' + master_sub + ' : ' + str(fuzz_ratio))
+        # print(fuzz_df.to_string())
+
+
+#  Rule 1: Fill master row  on 1 match w/ partial  >90 and ratio >80
+
+# PARTIAL
+# ALL BEST CONTRACTORS, ALL BEST CONTRACTOR CORP : 95
+# CG CONTRACTOR, BCG CONTRACTOR CORP : 100
+# CG CONTRACTOR, PERFECT CONTRACTOR CORP : 92
+# CG CONTRACTOR, CG CONTRACTOR LLC : 100
+# GEE COTRACTOR LLC, CG CONTRACTOR LLC : 91
+# GREEN MASTER CONTRACTOR CORP, GREEN MASTER CONTRACTOR CORP : 100
+# GS GENERAL CONSTRUCTION, DIMENSION GENERAL CONSTRUCTION LLC : 91
+# MAIN LINE CONTRACTOR CORP, MAIN LINE CONTRACTOR CORP : 100
+
+# RATIO
+# ALL BEST CONTRACTORS, ALL BEST CONTRACTOR CORP : 86
+# CG CONTRACTOR, BCG CONTRACTOR CORP : 81
+# CG CONTRACTOR, PERFECT CONTRACTOR CORP : 67
+# CG CONTRACTOR, CG CONTRACTOR LLC : 87
+# GEE COTRACTOR LLC, CG CONTRACTOR LLC : 88
+# GREEN MASTER CONTRACTOR CORP, GREEN MASTER CONTRACTOR CORP : 100
+# GS GENERAL CONSTRUCTION, DIMENSION GENERAL CONSTRUCTION LLC : 77
+# MAIN LINE CONTRACTOR CORP, MAIN LINE CONTRACTOR CORP : 100
 
 
 # df = pd.read_excel('/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/SUBS 2022.xlsx')
