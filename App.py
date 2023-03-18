@@ -39,8 +39,8 @@ def get_company():
     SubsReport.populate_subs(sub_totals)
     # print(SubsReport.merge_duplicates(sub_totals))
     
-get_company()
-# HtmlWriter.populate_html(get_company(),df)
+# get_company()
+HtmlWriter.populate_html(get_company(),df)
 
 
 

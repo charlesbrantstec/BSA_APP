@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import re 
 
-def populate_html(company, df, subs):
+def populate_html(company, df):
     with open('test.html', 'r', encoding="utf8") as f:
         html_string = f.read()
 

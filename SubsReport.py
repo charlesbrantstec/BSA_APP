@@ -1,9 +1,6 @@
-from doctest import master
-import Levenshtein
 import pandas as pd
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
-from pathlib import Path
 import re
 
 def has_letters(inputString):
@@ -99,7 +96,9 @@ def merge_duplicates(sub_totals):
 
 def populate_subs(sub_totals):
 
-    df = pd.read_excel('/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/SUBS 2022.xlsx')
+    # df = pd.read_excel('/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/SUBS 2022.xlsx')
+    # updated master subs 
+    df = pd.read_excel('/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/SUBS 2022 V1.xlsx')
     df = df.drop(0, axis=0)
 
     fuzz_df = pd.DataFrame(columns=['Input','Master','PartialRatio','Ratio'])
@@ -120,7 +119,7 @@ def populate_subs(sub_totals):
 
                 fuzz_df = fuzz_df.append(new_row, ignore_index=True)
 
-                if ratio >= 50 and fuzz_ratio >= 50:
+                if ratio >= 80 and fuzz_ratio >= 85:
 
                     # partial_ratio = fuzz.ratio(key.upper(), master_sub.upper())
 
