@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup as bs
 import pandas as pd
 import os
 import re 
+import CompanyReader
 
 def populate_html(company, df):
     with open('test.html', 'r', encoding="utf8") as f:
@@ -15,16 +16,16 @@ def populate_html(company, df):
     ein = df.loc[df['Customer'] == company, 'E.I.N.'].item()
 
     # Copy1
-    html_string = html_string.replace('id="Copy1CustomerContact">TEST<','id="Copy1CustomerContact">'+name+'<br>'+street+'<br>'+city+', '+state+' '+zip+'<')
+    html_string = html_string.replace('id="Copy1CustomerContact">TEST<','id="Copy1CustomerContact">'+name+'<br>'+street.upper()+'<br>'+city.upper()+', '+state+' '+zip+'<')
     html_string = html_string.replace('id="Copy1CustomerEIN">*<','id="Copy1CustomerEIN">'+ein+'<')
 
-    html_string = html_string.replace('id="CopyBCustomerContact">*<','id="CopyBCustomerContact">'+name+'<br>'+street+'<br>'+city+', '+state+' '+zip+'<')
+    html_string = html_string.replace('id="CopyBCustomerContact">*<','id="CopyBCustomerContact">'+name+'<br>'+street.upper()+'<br>'+city.upper()+', '+state+' '+zip+'<')
     html_string = html_string.replace('id="CopyBCustomerEIN">*<','id="CopyBCustomerEIN">'+ein+'<')
 
-    html_string = html_string.replace('id="Copy2CustomerContact">*<','id="Copy2CustomerContact">'+name+'<br>'+street+'<br>'+city+', '+state+' '+zip+'<') 
+    html_string = html_string.replace('id="Copy2CustomerContact">*<','id="Copy2CustomerContact">'+name+'<br>'+street.upper()+'<br>'+city.upper()+', '+state+' '+zip+'<') 
     html_string = html_string.replace('id="Copy2CustomerEIN">*<','id="Copy2CustomerEIN">'+ein+'<')
 
-    html_string = html_string.replace('id="CopyCCustomerContact">*<','id="CopyCCustomerContact">'+name+'<br>'+street+'<br>'+city+', '+state+' '+zip+'<') 
+    html_string = html_string.replace('id="CopyCCustomerContact">*<','id="CopyCCustomerContact">'+name+'<br>'+street.upper()+'<br>'+city.upper()+', '+state+' '+zip+'<') 
     html_string = html_string.replace('id="CopyCCustomerEIN">*<','id="CopyCCustomerEIN">'+ein+'<')
 
     
@@ -43,3 +44,7 @@ def populate_html(company, df):
         file.write(html_string)
 
     print('HTML successfully populated!')
+
+df = CompanyReader.setup_df()
+
+# populate_html('WG CONSTRUCTION INC', df)

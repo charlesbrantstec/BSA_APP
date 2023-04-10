@@ -30,6 +30,8 @@ def get_company():
             if y.upper() == 'Y' or y.upper() == 'YES':
                 inputted_company += match
                 break
+            else:
+                get_company()
     # return inputted_company
     print('Drag and drop the subcontractor report for your company here:')
     z = input()
@@ -38,9 +40,11 @@ def get_company():
     SubsReport.merge_duplicates(sub_totals)
     SubsReport.populate_subs(sub_totals)
     # print(SubsReport.merge_duplicates(sub_totals))
+
+    HtmlWriter.populate_html(inputted_company, df)
     
-# get_company()
-HtmlWriter.populate_html(get_company(),df)
+get_company()
+# HtmlWriter.populate_html(get_company(),df)
 
 
 
