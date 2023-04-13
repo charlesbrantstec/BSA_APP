@@ -7,6 +7,7 @@ import HtmlWriter
 df = CompanyReader.setup_df()
 
 print('Welcome to Charlie\'s 1096 & 1099 generator!')
+company = ''
 
 def get_company():
     print('Enter a company name: ')
@@ -29,10 +30,18 @@ def get_company():
             if y.upper() == 'Y' or y.upper() == 'YES':
                 inputted_company += match
                 break
+            else:
+                get_company()
     # return inputted_company
     print('Drag and drop the subcontractor report for your company here:')
     z = input()
-    print(SubsReport.merge_duplicates(SubsReport.sub_totals(z)))
+    sub_totals = SubsReport.sub_totals(z)
+    # print(sub_totals)
+    SubsReport.merge_duplicates(sub_totals)
+    SubsReport.populate_subs(sub_totals)
+    # print(SubsReport.merge_duplicates(sub_totals))
+
+    HtmlWriter.populate_html(inputted_company, df)
     
 get_company()
 # HtmlWriter.populate_html(get_company(),df)

@@ -1,25 +1,15 @@
-from quiffen import Qif
+# from quiffen import Qif
 import decimal
 from decimal import Decimal
 import pandas as pd
 import re
 import sys
 
-<<<<<<< HEAD
-# textfile = open(sys.argv[1], 'r')
-# pc
-# name = sys.argv[1].split('\\')[-1].split('.QIF')[0]
-# mac
-# name = sys.argv[1].split('/')[-1].split('.QIF')[0]
-textfile = open('REIFAST CONSTRUCTION.QIF', 'r')
-name = 'reifast'
-=======
 
 textfile = open(sys.argv[1], 'r')
 name = sys.argv[1].split('\\')[-1].split('.QIF')[0]
 # textfile = open('REIFAST CONSTRUCTION.QIF', 'r')
 # name = 'ae carpenters'
->>>>>>> 43853fa5497719411fb3a126a150dc7233344bb6
 filetext = textfile.read()
 textfile.close()
 
@@ -164,10 +154,6 @@ df.to_csv('C:/Users/12158/Desktop/BSA_APP/'+name+' - Income&Expense by Category.
 ##################################################
 
 
-<<<<<<< HEAD
-# mac
-df.to_csv('/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/' + name + ' - Income&Expense by Category.csv', index=False)
-=======
 
 
 
@@ -176,4 +162,3 @@ df.to_csv('/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/' + name + ' - Incom
 
 
 
->>>>>>> 43853fa5497719411fb3a126a150dc7233344bb6
