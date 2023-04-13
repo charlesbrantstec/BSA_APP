@@ -2,10 +2,13 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QFont
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
+import pandas as pd
 
 import CompanyReader
+from get_bk_data import get_data
 
-df = CompanyReader.setup_df()
+# df = CompanyReader.setup_df()
+df = pd.read_csv('contacts.csv')
 COMPANY_NAMES = df['Customer'].to_list()
 
 
@@ -49,6 +52,7 @@ class MainWindow(QMainWindow):
 
         # Get the selected company name
         selected_company = self.company_combo.currentText()
+        get_data(selected_company)
 
         # Find the row for the selected company and print each column on a new line
         selected_row = df.loc[df['Customer'] == selected_company]
@@ -57,9 +61,8 @@ class MainWindow(QMainWindow):
             column_value = selected_row[column].iloc[0]
             print(f"{column_name}: {column_value}")
 
-
         # Create success message label
-        success_label = QLabel("Company data successfully fetched")
+        success_label = QLabel("Company contact data successfully fetched")
         success_label.setStyleSheet("color: green; font-weight: bold")
 
         # Create QFormLayout for the selected row
