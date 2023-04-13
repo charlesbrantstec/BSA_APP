@@ -28,6 +28,7 @@ def setup_df():
         state = row['State']
         zip = row['Zip']
         ein = row['E.I.N.']
+        # contact_person = row['Contact Person']
 
         new_row = {}
         if company[0] == '*':
@@ -38,9 +39,11 @@ def setup_df():
                 street += row['Street2']
             new_row = {'Customer' : company[1:], 'Main Phone' : phone, 'Street' : street , 'City' : city , 'State' : state, 'Zip' : zip ,'E.I.N.' : ein}
             contacts_df = contacts_df.append(new_row, ignore_index=True)
+    # contacts_df.to_csv('contacts.csv',index=False)
     return contacts_df
 
-# print(setup_df())
+df = setup_df()
+print(df.to_string())
 # print(setup_df().loc[setup_df()['Customer'] == '5TAR PAINTING LLC'])
 # contacts_df = contacts_df.append({'Customer' : '123'}, ignore_index=True)
 # print(contacts_df)
