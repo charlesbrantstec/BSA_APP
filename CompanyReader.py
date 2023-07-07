@@ -2,6 +2,7 @@ import pandas as pd
 import warnings
 import re
 import math
+import csv
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
@@ -39,10 +40,18 @@ def setup_df():
         state = row['State']
         zip = row['Zip']
         ein = row['E.I.N.']
+        
+
         # primary_contact = row['Primary Contact']
 
         new_row = {}
         if company[0] == '*':
+            if type(zip) is float:
+                zip = str(int(zip))
+                
+                if len(zip) > 5:
+                    zip = zip.zfill(5)
+
             street = ''
             primary_contact = ''
             # if is_nan_empty_or_null(row['Street2']) and not is_nan_empty_or_null(row['Street1']):
@@ -60,9 +69,10 @@ def setup_df():
             new_row = {'Customer' : company[1:], 'Main Phone' : phone, 'Street' : street , 'City' : city , 'State' : state, 'Zip' : zip ,'Primary Contact' : primary_contact, 'E.I.N.' : ein}
             contacts_df = contacts_df.append(new_row, ignore_index=True)
     # contacts_df.to_csv('contacts.csv',index=False)
+    contacts_df['Zip'] = contacts_df['Zip'].astype(str)
     return contacts_df
 
-setup_df().to_csv('CONTACTS.CSV',index=False)
+setup_df().to_csv('CONTACTS.CSV',index=False, quoting=csv.QUOTE_ALL)
 # df = setup_df()
 # print(df.to_string())
 # print(setup_df().loc[setup_df()['Customer'] == '5TAR PAINTING LLC'])

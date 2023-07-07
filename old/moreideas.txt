@@ -1,0 +1,2 @@
+addon for selecting music by zone
+addon for distance tracking like google maps

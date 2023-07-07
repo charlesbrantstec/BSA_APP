@@ -4,7 +4,10 @@ import subprocess
 
 def get_data(name):
     # Start Quicken
-    process = subprocess.Popen('C:\\Users\\12158\\Downloads\\REIFAST CONSTRUCTION.QDF')
+    process = subprocess.Popen(r'C:\Program Files (x86)\Quicken\qw.exe')
+    # quicken_path = r'C:\Program Files (x86)\Quicken\Quicken.exe'
+    # process = subprocess.Popen([quicken_path])
+    # process = subprocess.Popen('C:\\Users\\12158\\Downloads\\REIFAST CONSTRUCTION.QDF')
 
     # Wait for Quicken to open
     time.sleep(5)
