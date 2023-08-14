@@ -1,25 +1,43 @@
 import pyautogui
 import time
 import subprocess
+import os
 
-def get_data(name):
+def get_data(path, cmp_name):
+    # Replace forward slashes with backslashes in the path
+    f_path = path.replace('/', '\\')
+    
+    # Create the new folder path
+    new_folder = 'C:\\Users\\12158\\Desktop\\Reports\\' + cmp_name + ' 2022\\'
+    
+    # Check if the new folder already exists, and create it if it doesn't
+    if not os.path.exists(new_folder):
+        os.makedirs(new_folder)
+    
+    # Construct the path to the QIF file within the new folder
+    qif_path = os.path.join(new_folder, cmp_name + '.QIF')
+
     # Start Quicken
     process = subprocess.Popen(r'C:\Program Files (x86)\Quicken\qw.exe')
-    # quicken_path = r'C:\Program Files (x86)\Quicken\Quicken.exe'
-    # process = subprocess.Popen([quicken_path])
-    # process = subprocess.Popen('C:\\Users\\12158\\Downloads\\REIFAST CONSTRUCTION.QDF')
 
     # Wait for Quicken to open
     time.sleep(5)
 
-    # Simulate keystrokes to navigate and perform tasks in Quicken
+    # Open selected company's QDF
+    pyautogui.hotkey('ctrl', 'o')
+    pyautogui.typewrite(f_path)
+    pyautogui.press('enter')
+
+    # Generate QIF from open QDF file
     pyautogui.hotkey('alt', 'f')
     pyautogui.press('down', 10)
     pyautogui.press('right')
     pyautogui.press('enter')
-    pyautogui.typewrite('C:\\Users\\12158\\Desktop\\BSA_APP\\forms\\' + name + '.QIF')
+    pyautogui.typewrite(qif_path)
     pyautogui.press('tab', 3)
     pyautogui.typewrite('1')
+    pyautogui.press('right')
+    pyautogui.typewrite('01')
     pyautogui.press('right')
     pyautogui.typewrite('2022')
     pyautogui.press('tab')
@@ -33,4 +51,6 @@ def get_data(name):
     pyautogui.press('enter')
 
     process.terminate()
+    return qif_path
+
 

@@ -1,0 +1,44 @@
+1096 Generator v1.0
+
+***How to run***
+
+ !! Please close all instances of Quicken open on machine prior to running the application !!
+
+ ## Select a company:
+
+ 	-Type the company name or select from the dropdown menu in the first box
+
+ 		* this is tied to a database (pulled from Quickbooks) which conatins
+                  all clients with their information
+
+ ## Add Quicken File
+
+ 	-Press "Add Quicken File" and navigate to the directory where the Quicken file is located.
+  	 Select the file for the given company and select "Open".
+
+ ## Get Data
+		
+	-Press the "Get Data" button
+	!! Do not move your mouse while the applicaion opens Quicken automatically and retrieves data,
+           wait ~10 seconds until data is retreived and Quicken is cloased automatically !!
+
+	-The next window will display the company data in edit-able boxes
+
+ ## Open Subcontractor Report
+
+	- "Open Subcontractor Report" will open an excel report with subcontractor data
+	
+	!! Please finalize and SAVE all changes to this report as this report is used when creating 1096 !!
+
+ ## Generate Forms
+
+	- After you have finalized the client's data and subcontractor report "Generate Forms"
+          will generate and automatically open your 1096!
+
+
+									~ email charlesbrantstec@gmail.com for feature feedback and bugs
+	
+	
+        
+ 
+

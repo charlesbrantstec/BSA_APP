@@ -7,11 +7,14 @@ import os
 import json
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
+import warnings
+
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
 # textfile = open(sys.argv[1], 'r')
 # name = sys.argv[1].split('\\')[-1].split('.QIF')[0]
-textfile = open('REIFAST CONSTRUCTION.QIF', 'r')
+textfile = open(r'C:\Users\12158\Desktop\BSA_APP\QIF\REIFAST CONSTRUCTION INC.QIF', 'r')
 name = 'REIFAST CONSTRUCTION'
 filetext = textfile.read()
 textfile.close()
@@ -55,7 +58,9 @@ def subs_df():
 
     # df = df.append({'Subcontractor':'******', '2022 Total':'******'}, ignore_index=True)
     # df = df.append({'Subcontractor':'TOTAL', '2022 Total':total}, ignore_index=True)
-    return df
+    print(df)
+    return df    
+
 
 
 # pc
@@ -117,5 +122,7 @@ def subs_info_df():
     # print(ndf)
     return ndf
                                    
-print(subs_info_df())
+# print(subs_info_df())
+
+subs_df()
 
