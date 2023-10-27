@@ -3,12 +3,17 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 import re
 
+
+# df = pd.read_excel(r'C:\Users\12158\Desktop\BSA_APP\ReifastSubs.xlsx')
+# subs_df = pd.read_excel(r'C:\Users\12158\Desktop\BSA_APP\SUBS 2022.xlsx')
+# # df = pd.read_excel(r'/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/ReifastSubs.xlsx')
+# # subs_df = pd.read_excel(r'/Users/charlesbrant-stec/Desktop/BSA_APP/BSA_APP/SUBS 2022.xlsx')
+# subs_df = subs_df.drop(subs_df.index[0])
+
 def has_letters(inputString):
     return bool(re.search('[a-zA-Z]', inputString))
 
 def sub_totals(report):
-# def sub_totals():
-    # df = pd.read_excel(r'C:\Users\12158\Desktop\BSA_APP\REIFAST SUBS.xlsx')
 
     sub_totals = {}
     # pc
