@@ -1,2 +1,4 @@
 # Ignore customer contacts
 *.csv
+*.xlsx
+*.qif
