@@ -17,7 +17,7 @@ def populate_html(company, excel):
     df = company_reader.setup_df() # Dataframe containing Client information
 
     # Convert our HTML template to a string for ease manipulating the data
-    with open('1096 template.html', 'r', encoding='utf8') as f:
+    with open('Templates/1096 template.html', 'r', encoding='utf8') as f:
         html_string = f.read()
 
     # Get the client information 
@@ -63,16 +63,16 @@ def populate_html(company, excel):
 
     print(threes)
 
-    with open('p4.txt', 'r', encoding='utf-8') as file:        
+    with open('Templates/p4.txt', 'r', encoding='utf-8') as file:        
         p4 = file.read()  # Read the contents of the file into a string variable
     
-    with open('p5.txt', 'r', encoding='utf-8') as file:        
+    with open('Templates/p5.txt', 'r', encoding='utf-8') as file:        
         p5 = file.read()  # Read the contents of the file into a string variable
 
-    with open('p6.txt', 'r', encoding='utf-8') as file:        
+    with open('Templates/p6.txt', 'r', encoding='utf-8') as file:        
         p6 = file.read()  # Read the contents of the file into a string variable
 
-    with open('p7.txt', 'r', encoding='utf-8') as file:        
+    with open('Templates/p7.txt', 'r', encoding='utf-8') as file:        
         p7 = file.read()  # Read the contents of the file into a string variable
 
     final_pg4 = ''
